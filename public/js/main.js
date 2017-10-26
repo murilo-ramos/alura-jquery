@@ -10,6 +10,7 @@ $(function() {
 	inicializaContadores();
 	inicializaMarcadores();
 	inicializaCronometro();
+	inicializaPlacar();
 	botaoReiniciar.click(reiniciaJogo);
 });
 
@@ -58,15 +59,22 @@ function inicializaCronometro() {
 		var cronometroId = setInterval(function () {
 			tempoRestante--;
 			tempoDigitacao.text(tempoRestante);
-			if (tempoRestante < 1) {				
-				campo.attr("disabled", true);
-				campo.toggleClass("campo-desativado");
-				botaoReiniciar.attr("disabled", false);
+			if (tempoRestante < 1) {
 				clearInterval(cronometroId);
+				finalizaJogo();
 			}
 		}, 1000);
 	});
 }
+
+function finalizaJogo() {
+	campo.attr("disabled", true);
+	campo.toggleClass("campo-desativado");
+	botaoReiniciar.attr("disabled", false);
+	inserePlacar();
+}
+
+
 
 
 
